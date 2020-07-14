@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useMemo } from 'react';
 import './App.css';
+import { useAUITable, AUITable } from '@aui/common/Table/table';
 
 function App() {
+  const data = useMemo(() => [
+    {
+      column1: 'React',
+      column2: 'Table'
+    },
+    {
+      column1: 'React',
+      column2: 'Query'
+    },
+    {
+      column1: 'React',
+      column2: 'Charts'
+    }
+  ], [])
+  const columns = useMemo(() => [
+    {
+      Header: 'Column 1',
+      accessor: 'column1'
+    },
+    {
+      Header: 'Column 2',
+      accessor: 'column2'
+    }
+  ], [])
+
+  //TODO add correct type
+  const instance = useAUITable<any>({
+    columns,
+    data
+  })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AUITable instance={instance} />
     </div>
   );
 }
