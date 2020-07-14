@@ -14,6 +14,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "react-table": "^7.2.2",
     "typescript": "^3.9.6"
   },
   "scripts": {
@@ -60,6 +61,7 @@
     "@commitlint/config-conventional": "^9.1.1",
     "@storybook/preset-create-react-app": "^3.1.4",
     "@storybook/react": "^5.3.19",
+    "@types/react-table": "^7.0.19",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5"
