@@ -5,26 +5,33 @@ import { useAUITable, AUITable } from '@aui/common/Table/table';
 function App() {
   const data = useMemo(() => [
     {
-      column1: 'React',
-      column2: 'Table'
+      name: 'Process Group Name',
+      status: 'Processing',
+      interval: 'Real-time',
+      nextAction: 'Stop'
     },
     {
-      column1: 'React',
-      column2: 'Query'
-    },
-    {
-      column1: 'React',
-      column2: 'Charts'
+      name: 'Process Group Name',
+      status: 'Stopped',
+      interval: '3days 2hrs 00min',
+      nextAction: 'Start'
     }
   ], [])
   const columns = useMemo(() => [
     {
-      Header: 'Column 1',
-      accessor: 'column1'
+      Header: 'Name',
+      accessor: 'name'
     },
     {
-      Header: 'Column 2',
-      accessor: 'column2'
+      Header: 'Status',
+      accessor: 'status'
+    },
+    {
+      Header: 'Interval',
+      accessor: 'interval'
+    },
+    {
+      accessor: 'nextAction'
     }
   ], [])
 
