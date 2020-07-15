@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import './App.css';
 import { useAUITable, AUITable } from '@aui/common/Table/table';
+import { withAUITheme } from '@aui/util'
 
-function App() {
+function _App() {
   const data = useMemo(() => [
     {
       name: 'Process Group Name',
@@ -47,4 +47,4 @@ function App() {
   );
 }
 
-export default App;
+export const App = withAUITheme(_App);
