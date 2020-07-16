@@ -6,6 +6,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import apacheNifiImg from '../assets/apache-nifi.png'
 import { StatusText } from '@aui/common';
 import { Column } from 'react-table'
+import { I18nProvider } from '@lingui/react'
+import { Trans } from '@lingui/macro'
 
 const useStyles = makeStyles({
   right: {
@@ -92,39 +94,47 @@ function _App() {
     data
   })
   return (
-    <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon color="primary" />}
-          aria-controls="expand-panel-content"
-          id="expand-panel-header"
-        >
-          <img 
-            src={apacheNifiImg} 
-            alt='Apache Nifi'
-            width="120"
-            height="50"
-          />
-          <AUITypography kind="sectionTitle" className={classes.sectionTitleText}>Apache NiFi</AUITypography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
-              <AUITypography kind="sectionSubtitle" className={classes.sectionSubtitleText}>Process Group(s)</AUITypography>
+    <I18nProvider language="en">
+      <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon color="primary" />}
+            aria-controls="expand-panel-content"
+            id="expand-panel-header"
+          >
+            <img 
+              src={apacheNifiImg} 
+              alt='Apache Nifi'
+              width="120"
+              height="50"
+            />
+            <AUITypography kind="sectionTitle" className={classes.sectionTitleText}>
+              <Trans>Apache NiFi</Trans>
+            </AUITypography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <AUITypography kind="sectionSubtitle" className={classes.sectionSubtitleText}>
+                  <Trans>Process Group(s)</Trans>
+                </AUITypography>
+              </Grid>
+              <Grid item xs={6} >
+                <Button color="primary" className={classes.right}>
+                  <Trans>Open NiFi Dashboard</Trans>
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <AUITable instance={instance} />
+              </Grid>
+              <Grid item xs={3}>
+                <Button variant="outlined" color="primary">
+                  <Trans>Add Process Group</Trans>
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={6} >
-              <Button color="primary" className={classes.right}>Open NiFi Dashboard</Button>
-            </Grid>
-            <Grid item xs={12}>
-              <AUITable instance={instance} />
-            </Grid>
-            <Grid item xs={3}>
-              <Button variant="outlined" color="primary">
-                Add Process Group
-              </Button>
-            </Grid>
-          </Grid>
-        </AccordionDetails>
-    </Accordion>
+          </AccordionDetails>
+      </Accordion>
+    </I18nProvider>
   )
 }
 
