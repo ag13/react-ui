@@ -1,93 +1,19 @@
-import React, { useMemo } from 'react';
-import apacheNifiImg from '@aui/assets/apache-nifi.png'
-import { withAUITheme, AUITypography } from '@aui/util'
-import { makeStyles } from '@material-ui/core'
-import { StatusText } from '@aui/common';
-import { Column } from 'react-table'
+import React from 'react';
+import { withAUITheme } from '@aui/util'
 import { I18nLoader } from '@aui/common'
-import { AccordionTable } from '@aui/common'
-import { t } from '@lingui/macro'
-
-const useStyles = makeStyles({
-  lastRunText: {
-    marginTop: '10px'
-  }
-})
+import { Route, BrowserRouter } from 'react-router-dom'
+import { NodeGroups } from '@aui/nodeGroups'
+import { ProcessGroups } from '@aui/processGroups'
+import { Home } from './Home'
 
 function _App() {
-  const classes = useStyles({})
-  const data = useMemo(() => [
-    {
-      name: {
-        type: 'Process Group Name',
-        text: 'MySQL DB to S3 Bucket'
-      },
-      status: 'Processing',
-      interval: {
-        time: 'Real-time',
-        lastRun: ''
-      },
-      nextAction: 'Stop'
-    },
-    {
-      name: {
-        type: 'Process Group Name',
-        text: 'MySQL DB to S3 Bucket'
-      },
-      status: 'Stopped',
-      interval: {
-        time: '3days 2hrs 00min',
-        lastRun: '01/07/2020 03:20 PM'
-      },
-      nextAction: 'Start'
-    }
-  ], [])
-  const columns: Array<Column<any>> = useMemo(() => [
-    {
-      Header: 'Name',
-      accessor: 'name',
-      Cell: ({ cell: {value} }) => 
-        <>
-          <AUITypography kind="sectionSubtitle">{value.type}</AUITypography>
-          <div>{value.text}</div>
-        </>
-    },
-    {
-      Header: 'Status',
-      accessor: 'status',
-      Cell: ({ cell }) => 
-        <AUITypography kind="sectionText">
-          <StatusText status={cell.value} />
-        </AUITypography>
-    },
-    {
-      Header: 'Interval',
-      accessor: 'interval',
-      Cell: ({cell: {value}}) =>
-        <>
-          <AUITypography kind="sectionText">{value.time}</AUITypography>
-          {
-            value.lastRun &&
-            <AUITypography kind="sectionTextGray" className={classes.lastRunText}>Last run on {value.lastRun}</AUITypography>
-          }
-        </>
-    },
-    {
-      accessor: 'nextAction'
-    }
-  ], [classes])
-
-  //TODO add correct type
-  
   return (
     <I18nLoader language="en">
-      <AccordionTable 
-        icon={apacheNifiImg} 
-        title={t`Apache NiFi`} 
-        tableTitle={t`Process Group(s)`}
-        columns={columns}
-        data={data}
-      />
+      <BrowserRouter>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/process" component={ProcessGroups} />
+        <Route exact path="/node" component={NodeGroups} />
+      </BrowserRouter>
     </I18nLoader>
   )
 }
