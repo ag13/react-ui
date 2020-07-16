@@ -28,6 +28,7 @@ export interface IAccordionTable{
     icon: string
     title: MessageDescriptor
     tableTitle: MessageDescriptor
+    addNewButtonText: MessageDescriptor
     columns: any
     data: any
 }
@@ -36,6 +37,7 @@ export const AccordionTable: React.FC<IAccordionTable> = ({
     icon,
     title,
     tableTitle,
+    addNewButtonText,
     columns,
     data
 }) => {
@@ -79,7 +81,7 @@ export const AccordionTable: React.FC<IAccordionTable> = ({
               </Grid>
               <Grid item xs={3}>
                 <Button variant="outlined" color="primary">
-                  <Trans>Add Process Group</Trans>
+                  <Trans>{i18n._(addNewButtonText)}</Trans>
                 </Button>
               </Grid>
             </Grid>
