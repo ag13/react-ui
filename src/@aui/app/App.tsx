@@ -1,25 +1,14 @@
 import React, { useMemo } from 'react';
-import { useAUITable, AUITable } from '@aui/common/Table/table';
+import apacheNifiImg from '@aui/assets/apache-nifi.png'
 import { withAUITheme, AUITypography } from '@aui/util'
-import { Accordion, AccordionSummary, AccordionDetails, Button, Grid, makeStyles } from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import apacheNifiImg from '../assets/apache-nifi.png'
+import { makeStyles } from '@material-ui/core'
 import { StatusText } from '@aui/common';
 import { Column } from 'react-table'
-import { I18nProvider } from '@lingui/react'
-import { Trans } from '@lingui/macro'
+import { I18nLoader } from '@aui/common'
+import { AccordionTable } from '@aui/common'
+import { t } from '@lingui/macro'
 
 const useStyles = makeStyles({
-  right: {
-    float: 'right'
-  },
-  sectionTitleText: {
-    marginLeft: '40px',
-    marginTop: '15px'
-  },
-  sectionSubtitleText: {
-    marginLeft: '15px'
-  },
   lastRunText: {
     marginTop: '10px'
   }
@@ -89,52 +78,17 @@ function _App() {
   ], [classes])
 
   //TODO add correct type
-  const instance = useAUITable<any>({
-    columns,
-    data
-  })
+  
   return (
-    <I18nProvider language="en">
-      <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon color="primary" />}
-            aria-controls="expand-panel-content"
-            id="expand-panel-header"
-          >
-            <img 
-              src={apacheNifiImg} 
-              alt='Apache Nifi'
-              width="120"
-              height="50"
-            />
-            <AUITypography kind="sectionTitle" className={classes.sectionTitleText}>
-              <Trans>Apache NiFi</Trans>
-            </AUITypography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Grid container spacing={3}>
-              <Grid item xs={6}>
-                <AUITypography kind="sectionSubtitle" className={classes.sectionSubtitleText}>
-                  <Trans>Process Group(s)</Trans>
-                </AUITypography>
-              </Grid>
-              <Grid item xs={6} >
-                <Button color="primary" className={classes.right}>
-                  <Trans>Open NiFi Dashboard</Trans>
-                </Button>
-              </Grid>
-              <Grid item xs={12}>
-                <AUITable instance={instance} />
-              </Grid>
-              <Grid item xs={3}>
-                <Button variant="outlined" color="primary">
-                  <Trans>Add Process Group</Trans>
-                </Button>
-              </Grid>
-            </Grid>
-          </AccordionDetails>
-      </Accordion>
-    </I18nProvider>
+    <I18nLoader language="en">
+      <AccordionTable 
+        icon={apacheNifiImg} 
+        title={t`Apache NiFi`} 
+        tableTitle={t`Process Group(s)`}
+        columns={columns}
+        data={data}
+      />
+    </I18nLoader>
   )
 }
 
