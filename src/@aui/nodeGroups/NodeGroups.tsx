@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import nodeJs from '@aui/assets/nodejs.png'
 import { AUITypography } from '@aui/util'
 import { StatusText } from '@aui/common';
@@ -15,31 +15,23 @@ const useStyles = makeStyles({
 
 export const NodeGroups = () => {
     const classes = useStyles({})
-    const data = useMemo(() => [
-        {
-        name: {
-            type: 'Node Group Name',
-            text: 'Node 1'
-        },
-        status: 'Processing',
-        interval: {
-            time: 'Real-time',
-            lastRun: ''
-        },
-        nextAction: 'Stop'
-        },
-        {
-        name: {
-            type: 'Node Group Name',
-            text: 'Node 2'
-        },
-        status: 'Processing',
-        interval: {
-            time: 'Real time',
-        },
-        nextAction: 'Stop'
+
+    const [data, setData] = useState([])
+    useEffect(() => {
+
+        async function fetchNodeGroups(){
+            const response = await fetch('https://my-json-server.typicode.com/ag13/react-ui/nodeGroups', {
+                method: 'GET'
+            })
+            if(response && response.status === 200){
+                setData(await response.json())
+            }
         }
-    ], [])
+
+        fetchNodeGroups()
+        
+    }, [])
+    
     const columns: Array<Column<any>> = useMemo(() => [
         {
         Header: 'Name',
