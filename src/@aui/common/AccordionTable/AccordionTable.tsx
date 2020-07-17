@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAUITable, AUITable } from '@aui/common/Table/table'
 import { Accordion, AccordionSummary, AccordionDetails, Button, Grid, makeStyles } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
@@ -31,6 +31,7 @@ export interface IAccordionTable{
     addNewButtonText: MessageDescriptor
     columns: any
     data: any
+    expanded?: boolean
 }
 
 export const AccordionTable: React.FC<IAccordionTable> = ({
@@ -39,16 +40,18 @@ export const AccordionTable: React.FC<IAccordionTable> = ({
     tableTitle,
     addNewButtonText,
     columns,
-    data
+    data,
+    expanded = true
 }) => {
     const classes = useStyles({})
+    const [panelExpanded, setPanelExpanded] = useState(expanded )
     const instance = useAUITable<any>({
         columns,
         data
       })
 
     return (
-        <Accordion>
+        <Accordion expanded={panelExpanded} onChange={() => setPanelExpanded(!panelExpanded)}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon color="primary" />}
             aria-controls="expand-panel-content"
