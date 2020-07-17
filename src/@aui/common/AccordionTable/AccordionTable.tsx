@@ -81,7 +81,7 @@ export const AccordionTable: React.FC<IAccordionTable> = ({
               </Grid>
               <Grid item xs={3}>
                 <Button variant="outlined" color="primary">
-                  <Trans>{i18n._(addNewButtonText)}</Trans>
+                  {i18n._(addNewButtonText)}
                 </Button>
               </Grid>
             </Grid>
