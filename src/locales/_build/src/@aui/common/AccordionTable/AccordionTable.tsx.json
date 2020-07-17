@@ -1,8 +1,5 @@
 {
   "Open NiFi Dashboard": {
     "origin": [["src/@aui/common/AccordionTable/AccordionTable.tsx", 45]]
-  },
-  "{0}": {
-    "origin": [["src/@aui/common/AccordionTable/AccordionTable.tsx", 53]]
   }
 }
