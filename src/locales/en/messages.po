@@ -13,18 +13,34 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/@aui/app/App.tsx:112
+#: src/@aui/nodeGroups/NodeGroups.tsx:70
+msgid "Add Node Group"
+msgstr "Add Node Group"
+
+#: src/@aui/processGroups/ProcessGroups.tsx:71
 msgid "Add Process Group"
 msgstr "Add Process Group"
 
-#: src/@aui/app/App.tsx:92
+#: src/@aui/processGroups/ProcessGroups.tsx:71
 msgid "Apache NiFi"
 msgstr "Apache NiFi"
 
-#: src/@aui/app/App.tsx:104
+#: src/@aui/nodeGroups/NodeGroups.tsx:70
+msgid "Node Group(s)"
+msgstr "Node Group(s)"
+
+#: src/@aui/nodeGroups/NodeGroups.tsx:70
+msgid "Nodes"
+msgstr "Nodes"
+
+#: src/@aui/common/AccordionTable/AccordionTable.tsx:45
 msgid "Open NiFi Dashboard"
 msgstr "Open NiFi Dashboard"
 
-#: src/@aui/app/App.tsx:99
+#: src/@aui/processGroups/ProcessGroups.tsx:71
 msgid "Process Group(s)"
 msgstr "Process Group(s)"
+
+#: src/@aui/common/AccordionTable/AccordionTable.tsx:53
+msgid "{0}"
+msgstr "{0}"

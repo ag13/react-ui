@@ -1,0 +1,11 @@
+{
+  "Apache NiFi": {
+    "origin": [["src/@aui/processGroups/ProcessGroups.tsx", 71]]
+  },
+  "Process Group(s)": {
+    "origin": [["src/@aui/processGroups/ProcessGroups.tsx", 71]]
+  },
+  "Add Process Group": {
+    "origin": [["src/@aui/processGroups/ProcessGroups.tsx", 71]]
+  }
+}
