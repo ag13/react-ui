@@ -1,26 +1,53 @@
-[
-  {
-    "name": {
-      "type": "Process Group Name",
-      "text": "MySQL DB to S3 Bucket"
+{
+  "processGroups": [
+    {
+      "name": {
+        "type": "Process Group Name",
+        "text": "MySQL DB to S3 Bucket"
+      },
+      "status": "Processing",
+      "interval": {
+        "time": "Real-time",
+        "lastRun": ""
+      },
+      "nextAction": "Stop"
     },
-    "status": "Processing",
-    "interval": {
-      "time": "Real-time",
-      "lastRun": ""
+    {
+      "name": {
+        "type": "Process Group Name",
+        "text": "MySQL DB to S3 Bucket"
+      },
+      "status": "Stopped",
+      "interval": {
+        "time": "3days 2hrs 00min",
+        "lastRun": "01/07/2020 03:20 PM"
+      },
+      "nextAction": "Start"
+    }
+  ],
+  "nodeGroups": [
+    {
+      "name": {
+        "type": "Node Group Name",
+        "text": "Node 1"
+      },
+      "status": "Processing",
+      "interval": {
+        "time": "Real-time",
+        "lastRun": ""
+      },
+      "nextAction": "Stop"
     },
-    "nextAction": "Stop"
-  },
-  {
-    "name": {
-      "type": "Process Group Name",
-      "text": "MySQL DB to S3 Bucket"
-    },
-    "status": "Stopped",
-    "interval": {
-      "time": "3days 2hrs 00min",
-      "lastRun": "01/07/2020 03:20 PM"
-    },
-    "nextAction": "Start"
-  }
-]
+    {
+      "name": {
+        "type": "Node Group Name",
+        "text": "Node 2"
+      },
+      "status": "Processing",
+      "interval": {
+        "time": "Real time"
+      },
+      "nextAction": "Stop"
+    }
+  ]
+}
