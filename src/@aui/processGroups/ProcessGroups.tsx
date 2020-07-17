@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import apacheNifiImg from '@aui/assets/apache-nifi.png'
 import { AUITypography } from '@aui/util'
 import { StatusText } from '@aui/common';
@@ -15,32 +15,23 @@ const useStyles = makeStyles({
 
 export const ProcessGroups = () => {
     const classes = useStyles({})
-    const data = useMemo(() => [
-        {
-        name: {
-            type: 'Process Group Name',
-            text: 'MySQL DB to S3 Bucket'
-        },
-        status: 'Processing',
-        interval: {
-            time: 'Real-time',
-            lastRun: ''
-        },
-        nextAction: 'Stop'
-        },
-        {
-        name: {
-            type: 'Process Group Name',
-            text: 'MySQL DB to S3 Bucket'
-        },
-        status: 'Stopped',
-        interval: {
-            time: '3days 2hrs 00min',
-            lastRun: '01/07/2020 03:20 PM'
-        },
-        nextAction: 'Start'
+
+    const [data, setData] = useState([])
+    useEffect(() => {
+
+        async function fetchProcessGroups(){
+            const response = await fetch('https://my-json-server.typicode.com/ag13/react-ui/processGroups', {
+                method: 'GET'
+            })
+            if(response && response.status === 200){
+                setData(await response.json())
+            }
         }
-    ], [])
+
+        fetchProcessGroups()
+        
+    }, [])
+    
     const columns: Array<Column<any>> = useMemo(() => [
         {
         Header: 'Name',
