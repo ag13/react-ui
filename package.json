@@ -22,7 +22,7 @@
     "react-scripts": "3.4.1",
     "react-table": "^7.2.2",
     "typeface-roboto": "^0.0.75",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
