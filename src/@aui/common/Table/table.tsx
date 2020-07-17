@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactElement } from 'react'
 import { useTable, TableOptions, TableInstance } from 'react-table'
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { Table, TableHead, TableBody, TableRow, TableCell, CircularProgress, makeStyles } from '@material-ui/core';
 
 export function useAUITable<T extends object>(tableProps: PropsWithChildren<TableOptions<T>>) {
     const { columns, data } = tableProps
@@ -15,7 +15,19 @@ export type TableProps<D extends object> = {
     instance: TableInstance<D>
 }
 
+const useStyles = makeStyles({
+    tableNoData: {
+        textAlign: 'center',
+        width: '100%',
+        minWidth: '100%'
+    },
+    progress: {
+        marginTop: '30px'
+    }
+})
+
 export function AUITable<T extends object>({instance}: PropsWithChildren<TableProps<T>>): ReactElement {
+    const classes = useStyles({})
     const {
         getTableProps,
         getTableBodyProps,
@@ -39,22 +51,28 @@ export function AUITable<T extends object>({instance}: PropsWithChildren<TablePr
             ))}
             </TableHead>
             <TableBody {...getTableBodyProps()}>
-            {rows.map(row => {
-                prepareRow(row)
-                return (
-                <TableRow {...row.getRowProps()}>
-                    {row.cells.map(cell => {
+                {
+                    (!rows || !rows.length) &&
+                    <div className={classes.tableNoData}>
+                        <CircularProgress color="primary" className={classes.progress} />
+                    </div>
+                }
+                {rows.map(row => {
+                    prepareRow(row)
                     return (
-                        <TableCell
-                        {...cell.getCellProps()}
-                        >
-                        {cell.render('Cell')}
-                        </TableCell>
+                    <TableRow {...row.getRowProps()}>
+                        {row.cells.map(cell => {
+                        return (
+                            <TableCell
+                            {...cell.getCellProps()}
+                            >
+                            {cell.render('Cell')}
+                            </TableCell>
+                        )
+                        })}
+                    </TableRow>
                     )
-                    })}
-                </TableRow>
-                )
-            })}
+                })}
             </TableBody>
         </Table>
     )
