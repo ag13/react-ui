@@ -6,7 +6,7 @@ export const PluginLoader = () => {
 
     const importComponent = (plugin: any) => 
         lazy(() => 
-            import(`./${plugin.name}/index.tsx`)
+            import(`./${plugin.name}/index.ts`)
         )
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export const PluginLoader = () => {
 
     return (
         <>
-        <div>Test plugin framework</div>
+        <div>Plugins that can be added via configuration</div>
         <Suspense fallback='Loading views...'>
             <div>{components}</div>
         </Suspense>

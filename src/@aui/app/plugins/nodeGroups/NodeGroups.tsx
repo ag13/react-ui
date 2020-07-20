@@ -1,5 +1,5 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import apacheNifiImg from '@aui/assets/apache-nifi.png'
+import React, { useMemo, useEffect, useState } from 'react';
+import nodeJs from '@aui/assets/nodejs.png'
 import { AUITypography } from '@aui/util'
 import { StatusText } from '@aui/common';
 import { Column } from 'react-table'
@@ -13,14 +13,14 @@ const useStyles = makeStyles({
     }
   })
 
-export const ProcessGroups = () => {
+const NodeGroups = () => {
     const classes = useStyles({})
 
     const [data, setData] = useState([])
     useEffect(() => {
 
-        async function fetchProcessGroups(){
-            const response = await fetch('https://my-json-server.typicode.com/ag13/react-ui/processGroups', {
+        async function fetchNodeGroups(){
+            const response = await fetch('https://my-json-server.typicode.com/ag13/react-ui/nodeGroups', {
                 method: 'GET'
             })
             if(response && response.status === 200){
@@ -28,7 +28,7 @@ export const ProcessGroups = () => {
             }
         }
 
-        fetchProcessGroups()
+        fetchNodeGroups()
         
     }, [])
     
@@ -71,12 +71,14 @@ export const ProcessGroups = () => {
     
     return (
         <AccordionTable 
-            icon={apacheNifiImg} 
-            title={t`Apache NiFi`} 
-            tableTitle={t`Process Group(s)`}
-            addNewButtonText={t`Add Process Group`}
+            icon={nodeJs} 
+            title={t`Nodes`} 
+            tableTitle={t`Node Group(s)`}
+            addNewButtonText={t`Add Node Group`}
             columns={columns}
             data={data}
         />
     )
 }
+
+export default () => <NodeGroups/>

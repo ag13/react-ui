@@ -8,6 +8,7 @@ export const Home = () => {
             <ul>
                 <li><NavLink to="/process">Process Group</NavLink></li>
                 <li><NavLink to="/node">Node Group</NavLink></li>
+                <li><NavLink to="/dashboard">Dashboard to demo plugin behavior</NavLink></li>
             </ul>
         </>
     )

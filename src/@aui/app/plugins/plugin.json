@@ -1,6 +1,11 @@
 [
   {
-    "name": "myTestPlugin",
+    "name": "nodeGroups",
+    "type": "dashboardCard",
+    "entry": "index.tsx"
+  },
+  {
+    "name": "processGroups",
     "type": "dashboardCard",
     "entry": "index.tsx"
   }
