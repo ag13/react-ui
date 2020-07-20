@@ -1,0 +1,7 @@
+[
+  {
+    "name": "myTestPlugin",
+    "type": "dashboardCard",
+    "entry": "index.tsx"
+  }
+]
