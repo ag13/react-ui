@@ -5,6 +5,7 @@ import { Route, HashRouter } from 'react-router-dom'
 import { NodeGroups } from '@aui/nodeGroups'
 import { ProcessGroups } from '@aui/processGroups'
 import { Home } from './Home'
+import { PluginLoader } from './plugins/PluginLoader'
 
 function _App() {
   return (
@@ -14,6 +15,7 @@ function _App() {
         <Route exact path="/process" component={ProcessGroups} />
         <Route exact path="/node" component={NodeGroups} />
       </HashRouter>
+      <PluginLoader />
     </I18nLoader>
   )
 }
