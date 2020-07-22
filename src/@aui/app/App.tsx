@@ -4,15 +4,19 @@ import { I18nLoader } from '@aui/common'
 import { Route, HashRouter } from 'react-router-dom'
 import { Dashboard } from './Dashboard'
 import { Home } from './Home'
+import { Provider } from 'react-redux'
+import store from './store'
 
 function _App() {
   return (
-    <I18nLoader language="en">
-      <HashRouter basename="/">
-        <Route exact path="/" component={Home} />
-        <Route exact path="/dashboard" component={Dashboard} />
-      </HashRouter>
-    </I18nLoader>
+    <Provider store={store}>
+      <I18nLoader language="en">
+        <HashRouter basename="/">
+          <Route exact path="/" component={Home} />
+          <Route exact path="/dashboard" component={Dashboard} />
+        </HashRouter>
+      </I18nLoader>
+    </Provider>
   )
 }
 
