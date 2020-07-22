@@ -13,10 +13,26 @@ const useStyles = makeStyles({
     }
   })
 
-const NodeGroups = () => {
+interface NodeGroupsProps{
+    event: any
+    onEventComplete: (param: any) => void
+}
+
+const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
+    const { event, onEventComplete } = props
     const classes = useStyles({})
 
     const [data, setData] = useState([])
+
+    useEffect(() => {
+        if(event && event.eventId){
+            console.log('Need to save node groups', event)
+            if(onEventComplete){
+                onEventComplete({eventId: event.eventId, data: {'result': 'success'}, eventName: 'save_complete'})
+            }
+        }
+    }, [event, onEventComplete])
+
     useEffect(() => {
 
         async function fetchNodeGroups(){
@@ -81,4 +97,4 @@ const NodeGroups = () => {
     )
 }
 
-export default () => <NodeGroups/>
+export default (props: NodeGroupsProps) => <NodeGroups {...props} />
