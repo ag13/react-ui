@@ -21,15 +21,21 @@ interface NodeGroupsProps{
 const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
     const { event, onEventComplete } = props
     const classes = useStyles({})
+    const [isSaving, setIsSaving] = useState(false)
 
     const [data, setData] = useState([])
 
     useEffect(() => {
         if(event && event.eventId){
+            setIsSaving(true)
             console.log('Need to save node groups', event)
-            if(onEventComplete){
-                onEventComplete({eventId: event.eventId, data: {'result': 'success'}, eventName: 'save_complete'})
-            }
+            setTimeout(() => {
+                if(onEventComplete){
+                    setIsSaving(false)
+                    onEventComplete({eventId: event.eventId, data: {'result': 'success'}, eventName: 'save_complete'})
+                }
+            }, 8000)
+            
         }
     }, [event, onEventComplete])
 
@@ -86,14 +92,17 @@ const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
     //TODO add correct type
     
     return (
-        <AccordionTable 
-            icon={nodeJs} 
-            title={t`Nodes`} 
-            tableTitle={t`Node Group(s)`}
-            addNewButtonText={t`Add Node Group`}
-            columns={columns}
-            data={data}
-        />
+        <>
+            {isSaving && <div>Node Groups Table data is being saved...</div>}
+            <AccordionTable 
+                icon={nodeJs} 
+                title={t`Nodes`} 
+                tableTitle={t`Node Group(s)`}
+                addNewButtonText={t`Add Node Group`}
+                columns={columns}
+                data={data}
+            />
+        </>
     )
 }
 

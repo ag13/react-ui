@@ -1,0 +1,54 @@
+import React, { useState, useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+// enum AUIPluginType {
+//     dashboardCard
+// }
+
+interface InjectedProps {
+    name: string
+    type: string
+    entry: string
+}
+
+interface WithInjectedComponentProps{
+    event: EventState
+    onEventComplete: (eventName: string, data?: any) => void
+}
+
+interface InjectedComponentProps {
+    Component: any
+    plugin: InjectedProps
+}
+
+type EventState = {
+    eventName: string
+    eventId: string
+}
+
+export const withInjectedComponent = <P extends WithInjectedComponentProps>(Component: React.ComponentType<P>) =>
+    const InjectedComponent: React.FC<> = ()
+    const [eventMessage, setEventMessage] = useState({})
+    const dispatch = useDispatch()
+    const { eventId, eventName } = useSelector((state: EventState) => state)
+    const { name } = props
+    
+    useEffect(() => {
+        setEventMessage({
+            eventName,
+            eventId
+        })
+    }, [eventId, eventName])
+
+    const handleEventComplete: (eventName: string, data: any) => void = useCallback((eventName, data) => {
+        dispatch({type: eventName, payload: {data}})
+    }, [dispatch])
+
+    return (
+        <Component 
+            event={eventMessage}
+            onEventComplete={handleEventComplete}
+            // {...rest}
+        />
+    )
+}
