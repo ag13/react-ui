@@ -1,30 +1,30 @@
 {
   "files": {
     "main.css": "/react-ui/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/react-ui/static/js/main.ce3744e4.chunk.js",
-    "main.js.map": "/react-ui/static/js/main.ce3744e4.chunk.js.map",
-    "runtime-main.js": "/react-ui/static/js/runtime-main.43d5e8a9.js",
-    "runtime-main.js.map": "/react-ui/static/js/runtime-main.43d5e8a9.js.map",
+    "main.js": "/react-ui/static/js/main.3dc0463a.chunk.js",
+    "main.js.map": "/react-ui/static/js/main.3dc0463a.chunk.js.map",
+    "runtime-main.js": "/react-ui/static/js/runtime-main.4a63e75d.js",
+    "runtime-main.js.map": "/react-ui/static/js/runtime-main.4a63e75d.js.map",
     "static/css/2.13bd2c67.chunk.css": "/react-ui/static/css/2.13bd2c67.chunk.css",
-    "static/js/2.25fab6ff.chunk.js": "/react-ui/static/js/2.25fab6ff.chunk.js",
-    "static/js/2.25fab6ff.chunk.js.map": "/react-ui/static/js/2.25fab6ff.chunk.js.map",
-    "static/js/3.d81907c5.chunk.js": "/react-ui/static/js/3.d81907c5.chunk.js",
-    "static/js/3.d81907c5.chunk.js.map": "/react-ui/static/js/3.d81907c5.chunk.js.map",
-    "static/js/4.289195ee.chunk.js": "/react-ui/static/js/4.289195ee.chunk.js",
-    "static/js/4.289195ee.chunk.js.map": "/react-ui/static/js/4.289195ee.chunk.js.map",
+    "static/js/2.949df424.chunk.js": "/react-ui/static/js/2.949df424.chunk.js",
+    "static/js/2.949df424.chunk.js.map": "/react-ui/static/js/2.949df424.chunk.js.map",
+    "static/js/3.079892b4.chunk.js": "/react-ui/static/js/3.079892b4.chunk.js",
+    "static/js/3.079892b4.chunk.js.map": "/react-ui/static/js/3.079892b4.chunk.js.map",
+    "static/js/4.d6365935.chunk.js": "/react-ui/static/js/4.d6365935.chunk.js",
+    "static/js/4.d6365935.chunk.js.map": "/react-ui/static/js/4.d6365935.chunk.js.map",
     "index.html": "/react-ui/index.html",
-    "precache-manifest.ccd341d56aedcf0ef5c8a01e036d4f51.js": "/react-ui/precache-manifest.ccd341d56aedcf0ef5c8a01e036d4f51.js",
+    "precache-manifest.857fd2c6fafdc726180f8f51866e79e4.js": "/react-ui/precache-manifest.857fd2c6fafdc726180f8f51866e79e4.js",
     "service-worker.js": "/react-ui/service-worker.js",
     "static/css/2.13bd2c67.chunk.css.map": "/react-ui/static/css/2.13bd2c67.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/react-ui/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.25fab6ff.chunk.js.LICENSE.txt": "/react-ui/static/js/2.25fab6ff.chunk.js.LICENSE.txt",
+    "static/js/2.949df424.chunk.js.LICENSE.txt": "/react-ui/static/js/2.949df424.chunk.js.LICENSE.txt",
     "static/media/index.css": "/react-ui/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.43d5e8a9.js",
+    "static/js/runtime-main.4a63e75d.js",
     "static/css/2.13bd2c67.chunk.css",
-    "static/js/2.25fab6ff.chunk.js",
+    "static/js/2.949df424.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.ce3744e4.chunk.js"
+    "static/js/main.3dc0463a.chunk.js"
   ]
 }
