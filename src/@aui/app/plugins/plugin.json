@@ -1,10 +1,12 @@
 [
   {
+    "id": "nodeGroups",
     "name": "nodeGroups",
     "type": "dashboardCard",
     "entry": "index.tsx"
   },
   {
+    "id": "processGroups",
     "name": "processGroups",
     "type": "dashboardCard",
     "entry": "index.tsx"

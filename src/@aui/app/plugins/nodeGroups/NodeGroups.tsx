@@ -14,30 +14,31 @@ const useStyles = makeStyles({
   })
 
 interface NodeGroupsProps{
-    event: any
+    eventMessage: any
     onEventComplete: (param: any) => void
 }
 
 const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
-    const { event, onEventComplete } = props
+    const { eventMessage } = props
     const classes = useStyles({})
     const [isSaving, setIsSaving] = useState(false)
-
+    const { onEventComplete } = props
     const [data, setData] = useState([])
 
     useEffect(() => {
-        if(event && event.eventId){
+        console.log('nodeGroups called', props)
+        
+        if(eventMessage && eventMessage.event.eventId){
             setIsSaving(true)
-            console.log('Need to save node groups', event)
             setTimeout(() => {
                 if(onEventComplete){
                     setIsSaving(false)
-                    onEventComplete({eventId: event.eventId, data: {'result': 'success'}, eventName: 'save_complete'})
+                    onEventComplete({plugin: {}, event: {eventId: eventMessage.event, eventName: 'SAVE_COMPLETE'}, data: {}})
                 }
             }, 8000)
             
         }
-    }, [event, onEventComplete])
+    }, [eventMessage, onEventComplete, props])
 
     useEffect(() => {
 
