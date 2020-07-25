@@ -26,14 +26,13 @@ const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        console.log('nodeGroups called', props)
         
         if(eventMessage && eventMessage.event.eventId){
             setIsSaving(true)
             setTimeout(() => {
                 if(onEventComplete){
                     setIsSaving(false)
-                    onEventComplete({plugin: {}, event: {eventId: eventMessage.event, eventName: 'SAVE_COMPLETE'}, data: {}})
+                    onEventComplete({plugin: eventMessage.plugin, event: {eventId: eventMessage.event, eventName: 'SAVE_COMPLETE'}, data: {}})
                 }
             }, 8000)
             
