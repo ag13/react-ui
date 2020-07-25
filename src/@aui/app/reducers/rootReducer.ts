@@ -6,7 +6,8 @@ export const rootReducer: (state: any, action: any) => void = (state = {startSav
             return {
                 ...state,
                 saveComplete: false,
-                eventId: action.payload.eventId
+                eventId: action.payload.eventId,
+                eventName: action.payload.eventName
             }
         }
         case 'SAVE_COMPLETE': {
