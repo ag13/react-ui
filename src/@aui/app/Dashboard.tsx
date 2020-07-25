@@ -8,7 +8,6 @@ export const Dashboard = () => {
 
     const handleClick = () => {
         //dispatch an action with event type and a unique id
-        console.log('dispatch save action')
         dispatch({type: 'SAVE', payload: {eventName: 'SAVE', eventId: Math.random()}})
     }
 
