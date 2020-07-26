@@ -1,9 +1,9 @@
 import React, { lazy, useState, useEffect, Suspense } from 'react'
 import plugins from './plugin.json'
 import { useSelector } from 'react-redux'
-import { Snackbar, IconButton, Button } from '@material-ui/core'
+import { Snackbar, IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
-import { withWidget, PluginProps } from './InjectedComponent'
+import { withWidget, PluginProps } from './WidgetComponent'
 
 export const PluginLoader = () => {
     const [components, setComponents] = useState<any>([])
@@ -13,7 +13,6 @@ export const PluginLoader = () => {
     useEffect(() => {
         if(savedData){
             setOpen(true)
-            console.log(savedData)
         }
     }, [savedData])
 
@@ -42,21 +41,17 @@ export const PluginLoader = () => {
 
     return (
         <>
-        <div>Plugins that can be added via configuration</div>
         <Snackbar
             anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
+            vertical: 'top',
+            horizontal: 'right',
             }}
             open={open}
             autoHideDuration={6000}
             onClose={handleClose}
-            message="Saved successfully"
+            message="On Container: Operation successful"
             action={
             <React.Fragment>
-                <Button color="secondary" size="small" onClick={handleClose}>
-                UNDO
-                </Button>
                 <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
                 <CloseIcon fontSize="small" />
                 </IconButton>

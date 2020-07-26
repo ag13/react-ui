@@ -8,60 +8,54 @@ export interface PluginProps {
     entry: string
 }
 
-export interface WithWidgetProps{
-    event: EventState
-    onEventComplete: (eventName: string, data?: any) => void
-}
-
-type EventState = {
+export interface EventState {
     eventName: string
     eventId: string
+    data?: any
 }
 
-interface EventMessage {
+export interface EventMessage {
     plugin: PluginProps,
-    event: EventState
+    event: EventState,
+    data?: any
 }
 
-interface EventCompleteMessage {
+export interface EventCompleteMessage {
     plugin: PluginProps,
     event: EventState,
     data: any
 }
 
+export interface WithWidgetProps{
+    event: EventState
+    onEventComplete: (eventMessageComplete: EventCompleteMessage) => void
+}
+
 export const withWidget = (pluginProps: PluginProps) => <P extends object>(Component: React.ComponentType<P>): React.FC<P & WithWidgetProps> => props => {
-    // const widgetProps = useWidget(pluginProps)
     const [widgetProps, setWidgetProps] = useState({})
     const [ eventMessage, setEventMessage ] = useState<EventMessage | undefined>(undefined)
+    
+    const { eventId, eventName, data } = useSelector((state: EventState) => state)
     const dispatch = useDispatch()
-    const { eventId, eventName } = useSelector((state: EventState) => state)
 
     const handleEventComplete: (eventCompleteMessage: EventCompleteMessage) => void = useCallback(eventCompleteMessage => {
-        console.log('inside handleEventComplete', eventCompleteMessage)
-        dispatch({type: eventCompleteMessage.event.eventName, payload: {data: eventCompleteMessage.data}})
+        dispatch({type: 'EVENT_COMPLETE', payload: {event: eventCompleteMessage.event, data: eventCompleteMessage.data}})
     }, [dispatch])
 
-    
     useEffect(() => {
-        console.log('message sent', eventId, eventName)
         if(eventId && eventName){
             setEventMessage({
-                plugin: {
-                    id: '1',
-                    name: '',
-                    type: '',
-                    entry: ''
-                },
+                plugin: pluginProps,
                 event: {
                     eventId,
                     eventName
-                }
+                },
+                data: data
             })
         }
-    }, [eventId, eventName])
+    }, [eventId, eventName, data])
 
     useEffect(() => {
-        console.log('setting widget props', eventMessage, handleEventComplete)
         setWidgetProps({eventMessage, onEventComplete: handleEventComplete})
     }, [eventMessage, handleEventComplete])
 

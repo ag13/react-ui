@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom'
 export const Home = () => {
     return (
         <>
-            <div>Sample application to demonstrate usage of common component library</div>
+            <div>Demo of widget framework and common component library</div>
             <ul>
-                <li><NavLink to="/process">Process Group</NavLink></li>
-                <li><NavLink to="/node">Node Group</NavLink></li>
-                <li><NavLink to="/dashboard">Dashboard to demo plugin behavior</NavLink></li>
+                <li><NavLink to="/dashboard">Widget Framework and inter communication</NavLink></li>
+                <li><NavLink to="/process">UI Component - Process Group</NavLink></li>
+                <li><NavLink to="/node">UI Component - Node Group</NavLink></li>
             </ul>
         </>
     )

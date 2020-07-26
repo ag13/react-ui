@@ -36,44 +36,55 @@ export function AUITable<T extends object>({instance}: PropsWithChildren<TablePr
         prepareRow,
     } = instance
     return (
-        <Table {...getTableProps()}>
-            <TableHead>
-            {headerGroups.map(headerGroup => (
-                <TableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                    <TableCell
-                    {...column.getHeaderProps()}
-                    >
-                    {column.render('Header')}
-                    </TableCell>
-                ))}
-                </TableRow>
-            ))}
-            </TableHead>
-            <TableBody {...getTableBodyProps()}>
-                {
-                    (!rows || !rows.length) &&
-                    <div className={classes.tableNoData}>
-                        <CircularProgress color="primary" className={classes.progress} />
-                    </div>
-                }
-                {rows.map(row => {
-                    prepareRow(row)
-                    return (
-                    <TableRow {...row.getRowProps()}>
-                        {row.cells.map(cell => {
-                        return (
+        <>
+            {
+                (!rows || !rows.length) &&
+                <div className={classes.tableNoData}>
+                    <CircularProgress color="primary" className={classes.progress} />
+                </div>
+            }
+            {
+                (rows && rows.length) ? 
+                <Table {...getTableProps()}>
+                    <TableHead>
+                    {headerGroups.map(headerGroup => (
+                        <TableRow {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map(column => (
                             <TableCell
-                            {...cell.getCellProps()}
+                            {...column.getHeaderProps()}
                             >
-                            {cell.render('Cell')}
+                            {column.render('Header')}
                             </TableCell>
-                        )
+                        ))}
+                        </TableRow>
+                    ))}
+                    </TableHead>
+                    <TableBody {...getTableBodyProps()}>
+                        {
+                            (!rows || !rows.length) &&
+                            <div className={classes.tableNoData}>
+                                <CircularProgress color="primary" className={classes.progress} />
+                            </div>
+                        }
+                        {rows.map(row => {
+                            prepareRow(row)
+                            return (
+                            <TableRow {...row.getRowProps()}>
+                                {row.cells.map(cell => {
+                                return (
+                                    <TableCell
+                                    {...cell.getCellProps()}
+                                    >
+                                    {cell.render('Cell')}
+                                    </TableCell>
+                                )
+                                })}
+                            </TableRow>
+                            )
                         })}
-                    </TableRow>
-                    )
-                })}
-            </TableBody>
-        </Table>
+                    </TableBody>
+                </Table> : null
+            }
+        </>
     )
 }

@@ -2,20 +2,33 @@
 export const rootReducer: (state: any, action: any) => void = (state = {startSave: false}, action) => {
     switch(action.type){
         case 'SAVE': {
-            console.log('action save', action.payload)
             return {
                 ...state,
-                saveComplete: false,
                 eventId: action.payload.eventId,
-                eventName: action.payload.eventName
+                eventName: action.payload.eventName,
+                data: action.payload.data
             }
         }
-        case 'SAVE_COMPLETE': {
-            console.log('action save complete', action.payload)
+        case 'EVENT_COMPLETE': {
             return {
                 ...state,
                 savedData: action.payload.data,
-                saveComplete: true
+            }
+        }
+        case 'NEXT_PAGE': {
+            return {
+                ...state,
+                eventId: action.payload.eventId,
+                eventName: action.payload.eventName,
+                data: undefined
+            }
+        }
+        case 'PREVIOUS_PAGE': {
+            return {
+                ...state,
+                eventId: action.payload.eventId,
+                eventName: action.payload.eventName,
+                data: undefined
             }
         }
         default:

@@ -13,10 +13,36 @@ const useStyles = makeStyles({
     }
   })
 
-const ProcessGroups = () => {
+interface ProcessGroupsProps{
+    eventMessage: any
+    onEventComplete: (param: any) => void
+}
+
+const ProcessGroups: React.FC<ProcessGroupsProps> = (props) => {
+    const { eventMessage: {event = {}, plugin = {}} = {} } = props
+    const { eventId, eventName } = event
+    const [isSaving, setIsSaving] = useState(false)
+    const { onEventComplete } = props
+
     const classes = useStyles({})
 
     const [data, setData] = useState([])
+
+    useEffect(() => {
+        
+        if(eventId && eventName){
+            setIsSaving(true)
+            //Using setTimeout just to mimick any operation (like API calls)
+            setTimeout(() => {
+                if(onEventComplete){
+                    setIsSaving(false)
+                    onEventComplete({plugin, event: {eventId, eventName: 'SAVE_COMPLETE'}, data: {time: Math.random()}})
+                }
+            }, 8000)
+            
+        }
+    }, [event, eventId, eventName, plugin, onEventComplete])
+
     useEffect(() => {
 
         async function fetchProcessGroups(){
@@ -70,15 +96,18 @@ const ProcessGroups = () => {
     //TODO add correct type
     
     return (
-        <AccordionTable 
-            icon={apacheNifiImg} 
-            title={t`Apache NiFi`} 
-            tableTitle={t`Process Group(s)`}
-            addNewButtonText={t`Add Process Group`}
-            columns={columns}
-            data={data}
-        />
+        <>
+            {isSaving && <div>Process Groups Table data is being saved...</div>}
+            <AccordionTable 
+                icon={apacheNifiImg} 
+                title={t`Apache NiFi`} 
+                tableTitle={t`Process Group(s)`}
+                addNewButtonText={t`Add Process Group`}
+                columns={columns}
+                data={data}
+            />
+        </>
     )
 }
 
-export default () => <ProcessGroups/>
+export default (props: ProcessGroupsProps) => <ProcessGroups {...props} />
