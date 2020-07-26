@@ -23,7 +23,8 @@ const theme = createMuiTheme({
     typography: {
         fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
         fontSize: 14,
-    }
+    },
+    spacing: 8
 })
 
 export const withAUITheme = <P extends {}>(Component: React.ComponentType<P>) => {

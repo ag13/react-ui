@@ -5,13 +5,30 @@ export const rootReducer: (state: any, action: any) => void = (state = {startSav
             return {
                 ...state,
                 eventId: action.payload.eventId,
-                eventName: action.payload.eventName
+                eventName: action.payload.eventName,
+                data: action.payload.data
             }
         }
-        case 'SAVE_COMPLETE': {
+        case 'EVENT_COMPLETE': {
             return {
                 ...state,
                 savedData: action.payload.data,
+            }
+        }
+        case 'NEXT_PAGE': {
+            return {
+                ...state,
+                eventId: action.payload.eventId,
+                eventName: action.payload.eventName,
+                data: undefined
+            }
+        }
+        case 'PREVIOUS_PAGE': {
+            return {
+                ...state,
+                eventId: action.payload.eventId,
+                eventName: action.payload.eventName,
+                data: undefined
             }
         }
         default:

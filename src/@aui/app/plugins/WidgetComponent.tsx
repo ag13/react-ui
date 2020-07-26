@@ -11,11 +11,13 @@ export interface PluginProps {
 export interface EventState {
     eventName: string
     eventId: string
+    data?: any
 }
 
 export interface EventMessage {
     plugin: PluginProps,
-    event: EventState
+    event: EventState,
+    data?: any
 }
 
 export interface EventCompleteMessage {
@@ -33,11 +35,11 @@ export const withWidget = (pluginProps: PluginProps) => <P extends object>(Compo
     const [widgetProps, setWidgetProps] = useState({})
     const [ eventMessage, setEventMessage ] = useState<EventMessage | undefined>(undefined)
     
-    const { eventId, eventName } = useSelector((state: EventState) => state)
+    const { eventId, eventName, data } = useSelector((state: EventState) => state)
     const dispatch = useDispatch()
 
     const handleEventComplete: (eventCompleteMessage: EventCompleteMessage) => void = useCallback(eventCompleteMessage => {
-        dispatch({type: eventCompleteMessage.event.eventName, payload: {data: eventCompleteMessage.data}})
+        dispatch({type: 'EVENT_COMPLETE', payload: {event: eventCompleteMessage.event, data: eventCompleteMessage.data}})
     }, [dispatch])
 
     useEffect(() => {
@@ -47,10 +49,11 @@ export const withWidget = (pluginProps: PluginProps) => <P extends object>(Compo
                 event: {
                     eventId,
                     eventName
-                }
+                },
+                data: data
             })
         }
-    }, [eventId, eventName])
+    }, [eventId, eventName, data])
 
     useEffect(() => {
         setWidgetProps({eventMessage, onEventComplete: handleEventComplete})

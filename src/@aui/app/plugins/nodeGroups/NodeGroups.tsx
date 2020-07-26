@@ -5,11 +5,16 @@ import { StatusText } from '@aui/common';
 import { Column } from 'react-table'
 import { AccordionTable } from '@aui/common'
 import { t } from '@lingui/macro'
-import { makeStyles } from '@material-ui/core'
+import { makeStyles, Card, CardContent } from '@material-ui/core'
 
 const useStyles = makeStyles({
     lastRunText: {
       marginTop: '10px'
+    },
+    saveDataMessage: {
+        color: 'red',
+        fontSize: '1.5rem',
+        fontWeight: 600
     }
   })
 
@@ -19,25 +24,54 @@ interface NodeGroupsProps{
 }
 
 const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
-    const { eventMessage } = props
+    const { eventMessage: {event = {}, plugin = {}, data = {}} = {} } = props
+    const { eventId, eventName } = event
+
     const classes = useStyles({})
     const [isSaving, setIsSaving] = useState(false)
+    const [operation, setOperation] = useState('')
     const { onEventComplete } = props
-    const [data, setData] = useState([])
+    const [nodeGroupsData, setNodeGroupsData] = useState<any>([])
+
+    useEffect(() => {
+        if(eventId && eventName && data && Object.keys(data).length){
+            const nodeData = {
+                "name": {
+                  "type": "Node Group Name",
+                  "text": data.groupName
+                },
+                "status": "Processing",
+                "interval": {
+                  "time": "Real-time",
+                  "lastRun": ""
+                },
+                "nextAction": "Stop"
+            }
+            setNodeGroupsData((nodeGroupsData: any) => [...nodeGroupsData, nodeData])
+        }
+    }, [data, eventId, eventName])
 
     useEffect(() => {
         
-        if(eventMessage && eventMessage.event.eventId){
+        if(eventId && eventName){
             setIsSaving(true)
+            if(eventName === 'SAVE'){
+                setOperation('Save')
+            }else if(eventName === 'NEXT_PAGE'){
+                setOperation('Next page')
+            }else if(eventName === 'PREVIOUS_PAGE'){
+                setOperation('Previous page')
+            }
+            //Using setTimeout just to mimick any operation (like API calls)
             setTimeout(() => {
                 if(onEventComplete){
                     setIsSaving(false)
-                    onEventComplete({plugin: eventMessage.plugin, event: {eventId: eventMessage.event, eventName: 'SAVE_COMPLETE'}, data: {}})
+                    onEventComplete({plugin, event: {eventId, eventName: 'SAVE_COMPLETE'}, data: {time: Math.random()}})
                 }
-            }, 8000)
+            }, 4000)
             
         }
-    }, [eventMessage, onEventComplete, props])
+    }, [event, eventId, eventName, plugin, onEventComplete])
 
     useEffect(() => {
 
@@ -46,7 +80,7 @@ const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
                 method: 'GET'
             })
             if(response && response.status === 200){
-                setData(await response.json())
+                setNodeGroupsData(await response.json())
             }
         }
 
@@ -93,15 +127,20 @@ const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
     
     return (
         <>
-            {isSaving && <div>Node Groups Table data is being saved...</div>}
-            <AccordionTable 
-                icon={nodeJs} 
-                title={t`Nodes`} 
-                tableTitle={t`Node Group(s)`}
-                addNewButtonText={t`Add Node Group`}
-                columns={columns}
-                data={data}
-            />
+            <Card>
+                <CardContent>
+                    {isSaving && <div className={classes.saveDataMessage}>On widget: {operation} operation performed</div>}
+                    <AccordionTable 
+                        icon={nodeJs} 
+                        title={t`Nodes`} 
+                        tableTitle={t`Node Group(s)`}
+                        addNewButtonText={t`Add Node Group`}
+                        columns={columns}
+                        data={nodeGroupsData}
+                    />
+                </CardContent>
+            </Card>
+            
         </>
     )
 }

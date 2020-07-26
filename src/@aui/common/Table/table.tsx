@@ -44,7 +44,7 @@ export function AUITable<T extends object>({instance}: PropsWithChildren<TablePr
                 </div>
             }
             {
-                rows && rows.length &&
+                (rows && rows.length) ? 
                 <Table {...getTableProps()}>
                     <TableHead>
                     {headerGroups.map(headerGroup => (
@@ -60,6 +60,12 @@ export function AUITable<T extends object>({instance}: PropsWithChildren<TablePr
                     ))}
                     </TableHead>
                     <TableBody {...getTableBodyProps()}>
+                        {
+                            (!rows || !rows.length) &&
+                            <div className={classes.tableNoData}>
+                                <CircularProgress color="primary" className={classes.progress} />
+                            </div>
+                        }
                         {rows.map(row => {
                             prepareRow(row)
                             return (
@@ -77,9 +83,8 @@ export function AUITable<T extends object>({instance}: PropsWithChildren<TablePr
                             )
                         })}
                     </TableBody>
-                </Table>
+                </Table> : null
             }
         </>
-        
     )
 }
