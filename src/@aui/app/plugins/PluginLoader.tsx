@@ -26,7 +26,7 @@ export const PluginLoader = () => {
             const componentPromises = plugins.map(async plugin => {
                 const PluginComponent = await importComponent(plugin)
                 const UIWidget = withWidget(plugin as PluginProps)(PluginComponent)
-                return <UIWidget />
+                return <UIWidget key={plugin.id} />
             })
 
             Promise.all(componentPromises).then(setComponents)
