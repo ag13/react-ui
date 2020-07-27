@@ -67,6 +67,39 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-### Widget Framework
+## Widget Framework
+
+This section describes how the widget framework works.
+
+The purpose of this framework is to be able to use any UI widget developed according to the widget specification to create a new UI view like a Dashboard.
+
+The widgets are registered as plugins and then wrapped with a higher order component that provides event handling between the container and the widget itself. This wrapper then gets rendered in the application.
+
+It supports configuration of multiple such widgets as plugins, currently maintained as a plugin configuration file. But this can be enhanced to have the plugins as independent repositories and then pull them via the node modules to create the relevant configuration file.
+
+The diagram below describes how it all works:
 
 ![Image of widget framework](public/widget-framework.png)
+
+### Event handling
+
+The communication between the container and the widget is handled by the widget wrapper by passing in relevant component props to the widget.
+
+There are two props `event` and `onEventComplete`
+
+`event`
+
+- The event prop contains details about the plugin to which the event needs to be sent along with the event information and any data that needs to be passed to the widget
+- The plugin information contains the id, name of the plugin, type of the plugin to enable the place where the plugin (widget) needs to be rendered and the entry file
+- The event object contains the event id as well as the event name. The event name can be one of the following `SAVE`, `NEXT_PAGE` and `PREVIOUS_PAGE`. This is extensible. The current set is only for POC purpose
+- The data object can be any data that the container wants to send to the widget
+
+`onEventComplete`
+
+- The onEventComplete callback prop is called by the widget whenever the operation corresponding to the event is completed
+- The callback parameter again contains the plugin, event and data information if any
+- The plugin information contains the id, name of the plugin, type of the plugin to enable the place where the plugin (widget) needs to be rendered and the entry file
+- The event object contains the event id as well as the event name. The event name can be one of the following `SAVE`, `NEXT_PAGE` and `PREVIOUS_PAGE`. This is extensible. The current set is only for POC purpose
+- The data object can be any data that the widget wants to send back to the container
+
+![Image of event handling](public/event-handling.png)
