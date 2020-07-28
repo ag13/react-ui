@@ -2,12 +2,14 @@
   {
     "id": "nodeGroups",
     "name": "nodeGroups",
+    "displayName": "Node Groups",
     "type": "dashboardCard",
     "entry": "index.tsx"
   },
   {
     "id": "processGroups",
     "name": "processGroups",
+    "displayName": "Process Groups",
     "type": "dashboardCard",
     "entry": "index.tsx"
   }
