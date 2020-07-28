@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     sectionTextGray: {
         fontSize: '0.8rem',
         fontWeight: 400,
-        lineHeight: 0.8,
+        lineHeight: 1.2,
         color: labelGray
     }
 })

@@ -9,6 +9,7 @@ export const Home = () => {
                 <li><NavLink to="/dashboard">Widget Framework and inter communication</NavLink></li>
                 <li><NavLink to="/process">UI Component - Process Group</NavLink></li>
                 <li><NavLink to="/node">UI Component - Node Group</NavLink></li>
+                <li><NavLink to="/dashboardMaker">Dashboard Maker</NavLink></li>
             </ul>
         </>
     )
