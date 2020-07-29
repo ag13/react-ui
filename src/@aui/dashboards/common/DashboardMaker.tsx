@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, Suspense } from 'react'
 import { AppBar, Toolbar, Button, makeStyles, Dialog, DialogTitle, DialogActions, DialogContent, Grid, Card, CardContent } from '@material-ui/core'
 import { AUITypography } from '@aui/util'
 import { Trans }  from '@lingui/macro'
@@ -6,6 +6,7 @@ import GridLayout from 'react-grid-layout'
 import plugins from '@aui/app/plugins/plugin.json'
 import { lightOrange } from '@aui/util'
 import isEmpty from 'lodash/isEmpty'
+import { loadPlugin } from '@aui/app/plugins'
 
 
 const useStyles = makeStyles({
@@ -24,15 +25,15 @@ export const DashboardMaker = () => {
     const classes = useStyles({})
     const [isAddTileOpen, setIsAddTileOpen] = useState(false)
     const [selectedPlugin, setSelectedPlugin] = useState<any>({})
+    const [loadedPlugins, setLoadedPlugins] = useState<any>([])
 
     const layout = [
-        {i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
-        {i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
-        {i: 'c', x: 4, y: 0, w: 1, h: 2}
+        {i: 'nodeGroups', x: 0, y: 0, w: 6, h: 5, static: true},
+        {i: 'processGroups', x: 6, y: 0, w: 6, h: 5, static: true}
     ]
 
     const handleAddTile = () => {
-        setIsAddTileOpen(true)
+        setIsAddTileOpen(true)   
     }
 
     const handleClose = () => {
@@ -43,9 +44,27 @@ export const DashboardMaker = () => {
         setSelectedPlugin(plugin)
     }
 
-    const handleTileSelection = () => {
+    // const addLayout = useCallback((plugins) => {
+    //     const layout = plugins.map((item: any, i: any) => {
+    //         return {
+    //             i: item.id, x: 0, y: 0, w: 1, h: 2, static: true
+    //         }
+    //       })
+    //     //   setLayout(layout)
+    // }, [])
+
+    const handleTileSelection = useCallback(() => {
         setIsAddTileOpen(false)
-    }
+        if(selectedPlugin){
+            Promise.all([loadPlugin(selectedPlugin)])
+                .then((resolvedPlugins) => {
+                    setLoadedPlugins([...loadedPlugins, ...resolvedPlugins])
+                })
+            // addLayout(plugins)
+        }else{
+            console.log('No plugin selected!')
+        }
+    }, [loadedPlugins, selectedPlugin])
 
     return (
         <>
@@ -62,11 +81,21 @@ export const DashboardMaker = () => {
                     </Button>
                 </Toolbar>
             </AppBar>
-            <GridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
-                <div key="a">a</div>
-                <div key="b">b</div>
-                <div key="c">c</div>
-            </GridLayout>
+            
+            {loadedPlugins && loadedPlugins.length ?
+                (
+                    <Suspense fallback="Loading grid">
+                        <GridLayout className="layout" layout={layout} cols={12} rowHeight={300} width={1200}>
+                        {
+                            
+                            loadedPlugins.map((plugin: any) => (                            
+                                <div key={plugin.key}>{plugin}</div>
+                            ))
+                        }
+                        </GridLayout>
+                    </Suspense>
+                ) : null
+            }
 
             <Dialog
                 open={isAddTileOpen}
