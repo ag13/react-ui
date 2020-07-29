@@ -19,8 +19,8 @@ const useStyles = makeStyles({
   })
 
 interface NodeGroupsProps{
-    eventMessage: any
-    onEventComplete: (param: any) => void
+    eventMessage?: any
+    onEventComplete?: (param: any) => void
 }
 
 const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
