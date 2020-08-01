@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './@aui/app/App';
 import * as serviceWorker from './serviceWorker';
+import 'react-resizable/css/styles.css'
+import 'react-grid-layout/css/styles.css'
 
 ReactDOM.render(
   <App />,
