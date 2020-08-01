@@ -2,11 +2,11 @@ import React, { useState, useCallback, Suspense } from 'react'
 import { AppBar, Toolbar, Button, makeStyles, Dialog, DialogTitle, DialogActions, DialogContent, Grid, Card, CardContent } from '@material-ui/core'
 import { AUITypography } from '@aui/util'
 import { Trans }  from '@lingui/macro'
-import GridLayout from 'react-grid-layout'
 import plugins from '@aui/app/plugins/plugin.json'
 import { lightOrange } from '@aui/util'
 import isEmpty from 'lodash/isEmpty'
 import { loadPlugin } from '@aui/app/plugins'
+import { DashboardGridLayout } from './DashboardGridLayout'
 
 
 const useStyles = makeStyles({
@@ -27,11 +27,6 @@ export const DashboardMaker = () => {
     const [selectedPlugin, setSelectedPlugin] = useState<any>({})
     const [loadedPlugins, setLoadedPlugins] = useState<any>([])
 
-    const layout = [
-        {i: 'nodeGroups', x: 0, y: 0, w: 6, h: 5, static: true},
-        {i: 'processGroups', x: 6, y: 0, w: 6, h: 5, static: true}
-    ]
-
     const handleAddTile = () => {
         setIsAddTileOpen(true)   
     }
@@ -44,15 +39,6 @@ export const DashboardMaker = () => {
         setSelectedPlugin(plugin)
     }
 
-    // const addLayout = useCallback((plugins) => {
-    //     const layout = plugins.map((item: any, i: any) => {
-    //         return {
-    //             i: item.id, x: 0, y: 0, w: 1, h: 2, static: true
-    //         }
-    //       })
-    //     //   setLayout(layout)
-    // }, [])
-
     const handleTileSelection = useCallback(() => {
         setIsAddTileOpen(false)
         if(selectedPlugin){
@@ -60,7 +46,6 @@ export const DashboardMaker = () => {
                 .then((resolvedPlugins) => {
                     setLoadedPlugins([...loadedPlugins, ...resolvedPlugins])
                 })
-            // addLayout(plugins)
         }else{
             console.log('No plugin selected!')
         }
@@ -85,14 +70,7 @@ export const DashboardMaker = () => {
             {loadedPlugins && loadedPlugins.length ?
                 (
                     <Suspense fallback="Loading grid">
-                        <GridLayout className="layout" layout={layout} cols={12} rowHeight={300} width={1200}>
-                        {
-                            
-                            loadedPlugins.map((plugin: any) => (                            
-                                <div key={plugin.key}>{plugin}</div>
-                            ))
-                        }
-                        </GridLayout>
+                        <DashboardGridLayout plugins={loadedPlugins} />
                     </Suspense>
                 ) : null
             }
