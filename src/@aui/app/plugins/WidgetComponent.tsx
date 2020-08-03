@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Draggable from 'react-draggable'
 
 export interface PluginProps {
     key: string
@@ -62,10 +61,8 @@ export const withWidget = (pluginProps: PluginProps) => <P extends object>(Compo
 
     //Need a div inside Draggable to enable dragging. Does not work without it!
     return (
-        <Draggable>
-            <div>
+        <div>
             <Component {...props} {...widgetProps} />
-            </div>
-        </Draggable>
+        </div>
     )
 }

@@ -5,7 +5,7 @@ import { StatusText } from '@aui/common';
 import { Column } from 'react-table'
 import { AccordionTable } from '@aui/common'
 import { t } from '@lingui/macro'
-import { makeStyles, Card, CardContent } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
     lastRunText: {
@@ -127,19 +127,15 @@ const NodeGroups: React.FC<NodeGroupsProps> = (props) => {
     
     return (
         <>
-            <Card>
-                <CardContent>
-                    {isSaving && <div className={classes.saveDataMessage}>On widget: {operation} operation performed</div>}
-                    <AccordionTable 
-                        icon={nodeJs} 
-                        title={t`Nodes`} 
-                        tableTitle={t`Node Group(s)`}
-                        addNewButtonText={t`Add Node Group`}
-                        columns={columns}
-                        data={nodeGroupsData}
-                    />
-                </CardContent>
-            </Card>
+            {isSaving && <div className={classes.saveDataMessage}>On widget: {operation} operation performed</div>}
+            <AccordionTable 
+                icon={nodeJs} 
+                title={t`Nodes`} 
+                tableTitle={t`Node Group(s)`}
+                addNewButtonText={t`Add Node Group`}
+                columns={columns}
+                data={nodeGroupsData}
+            />
             
         </>
     )

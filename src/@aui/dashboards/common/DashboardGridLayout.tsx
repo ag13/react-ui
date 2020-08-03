@@ -31,7 +31,11 @@ export const _DashboardGridLayout: React.FC<DashboardGridLayoutProps> = ({plugin
                 x: (index * 6) % 12,
                 y: index * 12,
                 w: 6,
-                h: 12
+                h: 12,
+                minW: 6,
+                maxW: 8,
+                maxH: 12,
+                minH: 12
             }
             const pluginIndex = pluginLayouts.findIndex((pluginLayout) => {
                 return pluginLayout.id === plugin.key
@@ -40,7 +44,7 @@ export const _DashboardGridLayout: React.FC<DashboardGridLayoutProps> = ({plugin
                 pluginLayouts.push({
                     id: plugin.key,
                     layout,
-                    plugin
+                    plugin 
                 })
             }
             return layout
@@ -51,7 +55,7 @@ export const _DashboardGridLayout: React.FC<DashboardGridLayoutProps> = ({plugin
 
     return (
         <>
-        <GridLayout className="layout" layout={layout} width={1200} cols={12} onLayoutChange={(currentLayout) => handleOnLayoutChange(currentLayout)}>
+        <GridLayout className="layout" layout={layout} width={1200} rowHeight={30} onLayoutChange={(currentLayout) => handleOnLayoutChange(currentLayout)} preventCollision={true} verticalCompact={false}>
             {
                 plugins.map((plugin: any, index: any) => (                            
                     <div key={plugin.key}>{plugin}</div>
