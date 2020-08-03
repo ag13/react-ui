@@ -1,13 +1,13 @@
 [
   {
-    "id": "nodeGroups",
+    "key": "nodeGroups",
     "name": "nodeGroups",
     "displayName": "Node Groups",
     "type": "dashboardCard",
     "entry": "index.tsx"
   },
   {
-    "id": "processGroups",
+    "key": "processGroups",
     "name": "processGroups",
     "displayName": "Process Groups",
     "type": "dashboardCard",

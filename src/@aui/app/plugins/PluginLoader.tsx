@@ -9,12 +9,12 @@ export const loadPlugin = async (plugin: PluginProps) => {
 
     const importComponent = (plugin: any) => 
         lazy(() => 
-            import(`./${plugin.name}/index.ts`)
+            import(`./${plugin.key}/index.ts`)
         )
     
     const PluginComponent = await importComponent(plugin)
     const UIWidget = withWidget(plugin as PluginProps)(PluginComponent)
-    return <UIWidget key={plugin.id} />
+    return <UIWidget key={plugin.key} />
 }
 
 export const PluginLoader = () => {
@@ -30,7 +30,7 @@ export const PluginLoader = () => {
 
     const importComponent = (plugin: any) => 
         lazy(() => 
-            import(`./${plugin.name}/index.ts`)
+            import(`./${plugin.key}/index.ts`)
         )
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export const PluginLoader = () => {
             const componentPromises = plugins.map(async plugin => {
                 const PluginComponent = await importComponent(plugin)
                 const UIWidget = withWidget(plugin as PluginProps)(PluginComponent)
-                return <UIWidget key={plugin.id} />
+                return <UIWidget key={plugin.key} />
             })
 
             Promise.all(componentPromises).then(setComponents)
