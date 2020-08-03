@@ -43,7 +43,9 @@ export const DashboardViewer = () => {
           return loadPlugin(pluginLayout.plugin)
         })
 
-        const layouts = pluginLayouts.map((pluginLayout: any) => pluginLayout.layout)
+        const layouts = pluginLayouts.map((pluginLayout: any) => {
+          return {...pluginLayout.layout, static: true, isDraggable: false}
+        })
         setLayout(layouts)
 
         Promise.all(componentPromises).then(setLoadedPlugins)
@@ -82,7 +84,7 @@ export const DashboardViewer = () => {
                 {loadedPlugins && loadedPlugins.length ?
                 (
                     <Suspense fallback="Loading grid">
-                      <GridLayout className="layout" layout={layout} width={1200} cols={12}>
+                      <GridLayout className="layout" layout={layout} width={1200} cols={12} isDraggable={false} isResizable={false}>
                           {
                               loadedPlugins.map((plugin: any, index: any) => (                            
                                   <div key={plugin.key}>{plugin}</div>
