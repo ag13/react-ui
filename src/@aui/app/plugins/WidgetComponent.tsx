@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Draggable from 'react-draggable'
 
 export interface PluginProps {
-    id: string
+    key: string
     name: string
     type: string
     entry: string
