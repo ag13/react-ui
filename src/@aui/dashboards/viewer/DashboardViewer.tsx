@@ -1,7 +1,8 @@
 import React, { useState, Suspense } from 'react'
 import { AUITypography } from '@aui/util'
 import { useLocalStorage } from '@aui/common/useLocalStorage'
-import { AppBar, Toolbar, makeStyles, Drawer, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
+import { AppBar, Toolbar, makeStyles, Drawer, IconButton, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
 import { loadPlugin } from '@aui/app/plugins'
 import GridLayout from 'react-grid-layout'
 
@@ -26,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
       flexGrow: 1,
-      marginLeft: '300px',
       padding: theme.spacing(3),
     },
   }))
@@ -36,6 +36,11 @@ export const DashboardViewer = () => {
     const [savedDashboards] = useLocalStorage('savedDashboard', [])
     const [loadedPlugins, setLoadedPlugins] = useState<any>([])
     const [layout, setLayout] = useState([])
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+    const handleDrawerOpen = () => {
+      setIsDrawerOpen(!isDrawerOpen)
+    }
 
     const handleDashboardOpen = (savedDashboard: any) => {
         const { pluginLayouts } = savedDashboard
@@ -47,6 +52,7 @@ export const DashboardViewer = () => {
           return {...pluginLayout.layout, static: true, isDraggable: false}
         })
         setLayout(layouts)
+        setIsDrawerOpen(false)
 
         Promise.all(componentPromises).then(setLoadedPlugins)
     }
@@ -55,6 +61,14 @@ export const DashboardViewer = () => {
         <div>
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                >
+                  <MenuIcon />
+              </IconButton>
                 <AUITypography kind="sectionTitle" noWrap>
                     Dashboard Viewer
                 </AUITypography>
@@ -62,7 +76,9 @@ export const DashboardViewer = () => {
             </AppBar>
             <Drawer
                 className={classes.drawer}
-                variant="permanent"
+                variant="persistent"
+                anchor="left"
+                open={isDrawerOpen}
                 classes={{
                 paper: classes.drawerPaper,
                 }}

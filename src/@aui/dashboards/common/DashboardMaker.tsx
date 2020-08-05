@@ -48,6 +48,7 @@ export const DashboardMaker = () => {
 
     const handleClose = () => {
         setIsAddTileOpen(false)
+        setSelectedPlugin({})
     }
 
     const handlePluginSelection = (plugin: any) => {
@@ -61,6 +62,7 @@ export const DashboardMaker = () => {
                 .then((resolvedPlugins) => {
                     setLoadedPlugins([...loadedPlugins, ...resolvedPlugins])
                 })
+            setSelectedPlugin({})
         }else{
             console.log('No plugin selected!')
         }
@@ -72,9 +74,12 @@ export const DashboardMaker = () => {
 
     const handlePublish = useCallback(() => {
         if(dashboardName && layoutValue){
-            setSavedDashboardValues([...savedDashboardValues, {dashboardName: dashboardName, pluginLayouts: layoutValue}])
-            setIsDashboardPublishOpen(false)
-            setOpenSnackbar(true)
+            const localStorageVal = window.localStorage.getItem('dashboardLayout')
+            if(localStorageVal){
+                setSavedDashboardValues([...savedDashboardValues, {dashboardName: dashboardName, pluginLayouts: JSON.parse(localStorageVal)}])
+                setIsDashboardPublishOpen(false)
+                setOpenSnackbar(true)
+            }
         }
     }, [layoutValue, dashboardName, savedDashboardValues, setSavedDashboardValues])
 
