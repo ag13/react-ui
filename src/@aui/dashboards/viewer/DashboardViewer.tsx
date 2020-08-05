@@ -37,13 +37,15 @@ export const DashboardViewer = () => {
     const [loadedPlugins, setLoadedPlugins] = useState<any>([])
     const [layout, setLayout] = useState([])
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+    const [dashboardName, setDashboardName] = useState('')
 
     const handleDrawerOpen = () => {
       setIsDrawerOpen(!isDrawerOpen)
     }
 
     const handleDashboardOpen = (savedDashboard: any) => {
-        const { pluginLayouts } = savedDashboard
+        const { pluginLayouts, dashboardName } = savedDashboard
+        setDashboardName(dashboardName)
         const componentPromises = pluginLayouts.map(async (pluginLayout: any) => {
           return loadPlugin(pluginLayout.plugin)
         })
@@ -97,6 +99,7 @@ export const DashboardViewer = () => {
             </Drawer>
             <main className={classes.content}>
                 <Toolbar />
+                <AUITypography kind="sectionSubtitle">{dashboardName}</AUITypography>
                 {loadedPlugins && loadedPlugins.length ?
                 (
                     <Suspense fallback="Loading grid">
