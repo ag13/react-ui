@@ -89,7 +89,7 @@
     "@types/lodash": "^4.14.158",
     "@types/react-grid-layout": "^0.17.2",
     "@types/react-router-dom": "^5.1.5",
-    "@types/react-table": "^7.0.20",
+    "@types/react-table": "^7.0.22",
     "babel-core": "^7.0.0-bridge.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
