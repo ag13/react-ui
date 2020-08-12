@@ -86,7 +86,7 @@
     "@types/lingui__core": "^2.7.0",
     "@types/lingui__macro": "^2.7.3",
     "@types/lingui__react": "^2.8.2",
-    "@types/lodash": "^4.14.158",
+    "@types/lodash": "^4.14.159",
     "@types/react-grid-layout": "^0.17.2",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-table": "^7.0.20",
