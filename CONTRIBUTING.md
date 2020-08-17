@@ -86,6 +86,10 @@ All date time values displayed in the UI should be localized using Luxon
 
 Cypress tests require a stable way to select elements. Instead of using class names or element hierarchy that can change, use a `data-test` attribute instead.
 
+#### All features behind a feature flag
+
+All new development of features should be behind a feature flag that can be enabled or disabled for different environments like staging or production. TODO - Setup a common framework for using feature flags and a UI screen to manage the same in different environments.
+
 ## Configuration best practices
 
 - Sort module imports using [this] module (https://www.npmjs.com/package/import-sort-style-modul) package 
